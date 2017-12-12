@@ -3,6 +3,7 @@ package agents
 import (
 	"github.com/gophercloud/gophercloud"
 	"github.com/gophercloud/gophercloud/pagination"
+	osTime "github.com/innovocloud/gophercloud_extensions/openstack/time"
 )
 
 // AgentPage abstracts the raw results of making a List() request against
@@ -15,15 +16,16 @@ type AgentPage struct {
 
 // Agent represents a blockstorage service in the OpenStack cloud.
 type Agent struct {
-	ID               string `json:"id"`
-	Binary           string `json:"binary"`
-	Description      string `json:"description"`
-	AvailabilityZone string `json:"availability_zone"`
-	AdminStateUp     bool   `json:"admin_state_up"`
-	Alive            bool   `json:"alive"`
-	Topic            string `json:"topic"`
-	Host             string `json:"host"`
-	AgentType        string `json:"agent_type"`
+	ID               string               `json:"id"`
+	Binary           string               `json:"binary"`
+	Description      string               `json:"description"`
+	AvailabilityZone string               `json:"availability_zone"`
+	AdminStateUp     bool                 `json:"admin_state_up"`
+	Alive            bool                 `json:"alive"`
+	Topic            string               `json:"topic"`
+	Host             string               `json:"host"`
+	AgentType        string               `json:"agent_type"`
+	Heartbeat        osTime.OpenStackTime `json:"heartbeat_timestamp"`
 }
 
 // IsEmpty returns true if a page contains no Agents results.
