@@ -52,3 +52,14 @@ func ExtractAgents(r pagination.Page) ([]Agent, error) {
 	err := r.(AgentPage).Result.ExtractIntoSlicePtr(&s, "agents")
 	return s, err
 }
+
+type GetResult struct {
+	gophercloud.Result
+}
+
+// Extract is a function that accepts a result and extracts a agent resource.
+func (r GetResult) Extract() (*Agent, error) {
+	var a Agent
+	err := r.Result.ExtractIntoStructPtr(&a, "agent")
+	return &a, err
+}
